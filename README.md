@@ -1,5 +1,5 @@
 # SpringCRUD
-FirstSpringProject This is my first spring project which demonstrate CRUD operations on a Table
+This is my first spring project which demonstrate CRUD operations on a Table
 
 Objective : I developed a small Spring Boot project that performs CRUD operations (Create, Read, Update, Delete) on a table called studentdata in my local mysql database. The project is a simple web application designed to manage student records efficiently. This project mainly focuses on basic data manipulation operations which could be performed on table.This could be sample module in Spring developed to showcase and understand about the frondend and backend working
 
