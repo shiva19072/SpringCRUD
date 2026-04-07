@@ -1,0 +1,80 @@
+.containers.active {
+    display: block;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size:medium;
+}
+.containers{
+display: none;
+}
+#studentTable{
+    display: none;
+}
+
+
+html,body{
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+    
+        .i
+        {
+            font-size: 200px;
+        }
+        /* btn group */
+        .btn{
+            color:black;
+            background-color: white;
+            border-color: black;
+        }
+        .btn:hover{
+            color:white;
+            background-color: rgb(9, 9, 212);
+        }
+
+         /* delete btn */
+        .btnd{
+            color:black;
+            background-color: white;
+            border-color: black;
+        }
+        .btnd:hover{
+            color:white;
+            background-color: rgb(243, 9, 9);
+        }
+            /* create btn */
+         .btnc{
+            color:black;
+            background-color: white;
+            border-color: black;
+        }
+        .btnc:hover{
+            color:white;
+            background-color: rgb(7, 145, 7);
+        }
+    /* update btn */
+        .btnu{
+            color:black;
+            background-color: white;
+            border-color: black;
+        }
+        .btnu:hover{
+            color:white;
+            background-color: rgb(8, 187, 214);
+        }
+        /* fetchbutton */
+        .btnf{
+            color:black;
+            background-color: white;
+            border-color: rgb(202, 202, 203); 
+        }
+        .btnf:hover{
+            color:white;
+            background-color: black;
+        }
+
+          .main{border: 2px solid black;
+            height: 100%;
+            width:100%;
+          }

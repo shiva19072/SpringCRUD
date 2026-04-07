@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap links -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <title>CRUD Operations Spring</title>
+    <!-- CSS and JS -->
+    <link rel="stylesheet" href="/css/studentstyle.css">
+    <script src="/js/studentJS.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <!-- main container -->
+    <div class="main container container-fluid vh-100 p-2 mx-auto row border border-none" >
+      
+    <!-- Button Container -->
+    <div class="container col-4">
+             <!-- vertical button group -->
+            <div class="main row btn-group-vertical mx-auto border border-none" role="group" aria-label="Basic outlined example">
+       <button type="button" class="col btn btn-outline-primary fs-4" onclick="showContainer('container1');"><i class="bi bi-person-fill-add me-2 fs-1"></i>CREATE</button>
+       <button type="button" class="col btn btn-outline-primary fs-4" onclick="showContainer('container2')"><i class="bi bi-person-fill-gear me-2 fs-1"></i>UPDATE</button>
+       <button type="button" class="col btn btn-outline-primary fs-4" onclick="showContainer('container7')"><i class="bi bi-person-fill-dash me-2 fs-1"></i>DELETE</button>
+       <button type="button" class="col btn btn-outline-primary fs-4" onclick="showContainer('container5')" ><i class="bi bi-person-fill me-2 fs-1"></i>READ ONE</button>
+       <button type="button" class="col btn btn-outline-primary fs-4" onclick="getAllStudents(event)"><i class="bi bi-people-fill me-2 fs-1"></i>READ ALL</button>
+            </div>
+    </div>
+
+<!-- content container -->
+<div class="container col-8 d-flex align-items-center vh-90">
+
+
+    <!-- Create Display -->
+     <!-- create container -->
+     <div id="container1" class="containers container p-3 mx-auto mt-2 border border-dark">
+      <!-- message -->
+    <div class="alert alert-warning p-2" role="alert" id="messagepost" style="display: none;"></div>
+    
+    <!-- create form -->
+    <form action="/studentsdata" method="post" id="createform" onsubmit="postfn(event)">
+ <div class="mb-3 col-6">
+    <label for="Pname" class="form-label">Name :</label>
+    <input type="text" class="form-control" id="Pname" placeholder="Full Name" maxlength="45">
+  </div>
+
+  <div class="col-6 mb-3">
+    <label for="Pcollege" class="form-label">College:</label>
+    <input type="text" class="form-control" id="Pcollege" maxlength="45" placeholder="Institution Name">
+  </div>
+
+ <div class="row align-items-center justify-content-between mt-3">
+  <div class="col-5 mb-3 ">
+    <label for="Proll" class="form-label">Roll Number :</label>
+    <input type="text" class="form-control" id="Proll" maxlength="10" placeholder="Enter 10 Digit Roll Number">
+  </div>
+
+  <div class="col-5 mb-3 ">
+    <label for="Pqualification" class="form-label">Qualification :</label>
+    <select id="Pqualification" class="form-select">
+      <option selected>-Select-</option>
+      <option value="Diploma">Diploma</option>
+      <option value="B.Tech">B.Tech</option>
+      <option value="M.Tech">M.Tech</option>
+      <option value="BSc">BSc</option>
+      <option value="MSc">MSc</option>
+      <option value="BCom">BCom</option>
+      <option value="BCA">BCA</option>
+      
+    </select>
+  </div>
+</div>
+
+  <div class="col-2 mb-3">
+    <label for="Pyear" class="form-label">Year :</label>
+    <input type="number" class="form-control" id="Pyear" min="1900" max="2099">
+  </div>
+
+  <div class="col-3 mb-3">
+    <label for="Pcertificate" class="form-label">Certificate Number :</label>
+    <input type="text" class="form-control" id="Pcertificate" placeholder="TGXXXXXXXX" maxlength="10">
+  </div>
+  
+  <div class="col-12 mt-3">
+    <button type="submit" class="btnc btn btn-success">Create</button>
+  </div>
+
+        </form>
+     </div>
+
+
+
+<!-- Update Display -->
+<!--update container -->
+ <div id="container2" class="containers container p-3 mx-auto mt-2 border border-dark">
+    <!-- message -->
+    <div class="alert alert-warning p-2" role="alert" id="messageupdate" style="display: none;"></div>
+  
+    <!-- form -->
+  <form onsubmit="updatefn(event)" id="updateform" class="p-2">
+    <div class="row mb-2">
+    <!-- <div class="col-2 p-3">
+    <label for="idu" class="form-label"> ID:</label>
+    </div> -->
+
+    <div class="col-6 input-group p-2" style="width: 40%">
+<label for="idu" class="form-label m-auto px-2"> Student ID:</label>
+  <input type="number" class="form-control" min="1" aria-label="Student ID" id="idu" required>
+  <button class="btnf btn btn-primary p-2" type="button" onclick="updatefetch(event)">Fetch</button>
+    </div>
+    </div> 
+  
+<!-- update data display -->
+ <div class="alert alert-warning p-2" role="alert" id="messageupdate" style="display: none;"></div>
+     <div class="col-6 mb-3 mt-4">
+    <label for="Uname" class="form-label">Name :</label>
+    <input type="text" class="form-control" id="Uname" placeholder="Full Name" maxlength="45">
+  </div>
+
+ <div class="col-6 mb-3 mt-4">
+    <label for="Ucollege" class="form-label">College:</label>
+    <input type="text" class="form-control" id="Ucollege" maxlength="45" placeholder="Institution Name">
+  </div>
+
+ <div class="row align-items-center justify-content-between mt-3">
+  <div class="col-5 mb-3 ">
+    <label for="Uroll" class="form-label">Roll Number :</label>
+    <input type="text" class="form-control" id="Uroll" maxlength="10" placeholder="Enter 10 Digit Roll Number">
+  </div>
+
+  <div class="col-5 mb-3 ">
+    <label for="Uqualification" class="form-label">Qualification :</label>
+    <select id="Uqualification" class="form-select">
+      <option selected>-Select-</option>
+      <option value="Diploma">Diploma</option>
+      <option value="B.Tech">B.Tech</option>
+      <option value="M.Tech">M.Tech</option>
+      <option value="BSc">BSc</option>
+      <option value="MSc">MSc</option>
+      <option value="BCom">BCom</option>
+      <option value="BCA">BCA</option>
+      
+    </select>
+</div>
+  </div>
+  <div class="col-2 mb-3">
+    <label for="Uyear" class="form-label">Year :</label>
+    <input type="number" class="form-control" id="Uyear" min="1900" max="2099">
+  </div>
+
+  <div class="col-3 mb-3">
+    <label for="Ucertificate" class="form-label">Certificate Number :</label>
+    <input type="text" class="form-control" id="Ucertificate" placeholder="TGXXXXXXXX" maxlength="10">
+  </div>
+  <button type="submit" class="btnu btn btn-success mt-1" onsubmit="updatefn(event)">Update</button>
+</form>
+ </div>
+
+     <!-- get by id display -->
+      <!--get by id container -->
+  <div id="container5" class="containers container p-3 mx-auto mt-2 border border-dark">
+    <!-- form -->
+      <form onsubmit="gbisb(event)" class="p-2">
+        <div class="col-6 mb-3">
+      <label for="idgbi" class="form-label">Enter the ID:</label>
+      <input type="number" id="idgbi" class="form-control">
+      </div>
+      <button type="submit" class="btnf btn btn-success col-2">Get</button>
+      </form>
+<!-- data table -->
+  <table class="table" id="studentTable">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">College</th>
+      <th scope="col">Roll Number</th>
+      <th scope="col">Qualification</th>
+      <th scope="col">Year</th>
+      <th scope="col">Certificate</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+  </tbody>
+  </table>
+      </div>
+
+
+ <!-- get all display -->
+  <!-- get all container -->
+        <div id="container6" class="containers container p-3 mx-auto mt-2 border border-dark">
+  <!-- data table -->
+  <table class="table" id="studentsTable">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">College</th>
+      <th scope="col">Roll Number</th>
+      <th scope="col">Qualification</th>
+      <th scope="col">Year</th>
+      <th scope="col">Certificate</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+  </tbody>
+  </table>
+        </div>
+
+
+        <!-- delete display -->
+         <!--delete container -->
+        <div id="container7" class="containers container p-3 mx-auto mt-2 border border-dark">
+           <div class="alert alert-warning p-2" role="alert" id="messagedelete" style="display: none;"></div>
+
+          <!-- form -->
+          <form class="row g-4" onsubmit="deleteStudent(event)">
+        <div class="col-12">
+          <label for="did" class="form-label">Enter Student ID to Delete:</label>
+          <input type="number" class="form-control" id="did" min="1" required>
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btnd btn btn-danger">Delete Student</button>
+        </div>
+      </form>
+</div>
+
+        </div>
+
+</div>
+        
+   
+</body>
+</html>
